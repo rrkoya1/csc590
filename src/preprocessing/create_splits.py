@@ -1,4 +1,4 @@
-# src/make_fixed_split.py
+
 import argparse
 import json
 import os
