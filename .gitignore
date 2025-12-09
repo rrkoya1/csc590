@@ -1,0 +1,29 @@
+# --- Data Privacy Exclusion (CRITICAL) ---
+# EXCLUDE RAW PATIENT DATA AND LABELS
+data/datasets/TCGA_Reports.csv
+data/datasets/TCGA_M01_patients.csv
+data/datasets/TCGA_N03_patients.csv
+data/datasets/TCGA_T14_patients.csv
+data/datasets/tcga_patient_to_cancer_type.csv
+data/datasets/tcga_reports_tnm_stage.csv
+data/datasets/test_tcga_reports_tnm_stage.csv
+
+# --- Machine Learning Files ---
+# EXCLUDE heavy model checkpoints and intermediate results
+outputs/
+results/calibration_data.csv
+results/runtime_analysis.csv
+*.model
+*.bin
+
+# --- General Python Environment Files ---
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db

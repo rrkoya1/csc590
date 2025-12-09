@@ -1,0 +1,4 @@
+Model,Type,Inference_Time_Per_Doc (s),Hardware,Docs_Per_Minute,Slowdown_vs_BERT
+SVM (Baseline),Classical,0.0002,CPU,300000,0.0x
+ClinicalBERT,Fine-Tuned,0.015,RTX 4070,4000,1.0x
+Llama 3 (8B),Generative LLM,4.1,RTX 4070,14,273.3x

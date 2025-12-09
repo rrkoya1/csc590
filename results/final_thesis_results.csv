@@ -1,0 +1,13 @@
+Task,Model,Metric,Type
+T-Stage,SVM (Baseline),0.6452,Classical
+T-Stage,ClinicalBERT,0.7552,Fine-Tuned
+T-Stage,Llama 3 (Zero),0.3166,LLM
+T-Stage,Llama 3 (Few),0.7138,LLM
+N-Stage,SVM (Baseline),0.6349,Classical
+N-Stage,ClinicalBERT,0.7259,Fine-Tuned
+N-Stage,Llama 3 (Zero),0.3092,LLM
+N-Stage,Llama 3 (Few),0.3098,LLM
+M-Stage,SVM (Baseline),0.4039,Classical
+M-Stage,ClinicalBERT,0.3221,Fine-Tuned
+M-Stage,Llama 3 (Zero),0.4244,LLM
+M-Stage,Llama 3 (Few),0.3371,LLM
