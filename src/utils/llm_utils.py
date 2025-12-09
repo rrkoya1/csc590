@@ -1,21 +1,16 @@
-# src/llm_utils_local.py
+
 from __future__ import annotations
 import json
 import re
 import requests
 from typing import Any, Dict, List, Optional
 
-# -----------------------------
-# Label Definitions
-# -----------------------------
+
 TN_ONLY_LABELS = ["T1", "T2", "T3", "T4"]
 N_ONLY_LABELS  = ["N0", "N1", "N2", "N3"]
 M_ONLY_LABELS  = ["M0", "M1"]
 TNM_ALL_LABELS = TN_ONLY_LABELS + N_ONLY_LABELS + M_ONLY_LABELS
 
-# -----------------------------
-# Prompt Handling
-# -----------------------------
 def load_prompt_json(path: str) -> Any:
     """Load a JSON prompt file."""
     with open(path, "r", encoding="utf-8") as f:
@@ -24,7 +19,7 @@ def load_prompt_json(path: str) -> Any:
 def _inject(template: str, text: str) -> str:
     if not template:
         return ""
-    # Replace common placeholders, case-insensitive variants
+ 
     return (
         template
         .replace("{{REPORT}}", text)
@@ -76,10 +71,6 @@ def build_prompt(prompt_obj: Any, report_text: str) -> Dict[str, Any]:
         s = s + "\n\nREPORT:\n" + report_text
     return {"messages": [{"role": "user", "content": s}]}
 
-# -----------------------------
-# Output Parsing
-# -----------------------------
-# Strict patterns like T1..T4, N0..N3, M0..M1 (avoid matching words like "is")
 STRICT_LABEL_RE = re.compile(r"\b([TMN][0-4])\b", re.IGNORECASE)
 
 def normalize_label(s: str) -> Optional[str]:
@@ -136,9 +127,8 @@ def parse_label_strict(text: str, allowed_labels: List[str]) -> str:
     # fallback to tolerant
     return parse_label_from_text(text, allowed_labels)
 
-# -----------------------------
 # Ollama API Client
-# -----------------------------
+
 def _post_ollama_chat(host: str, payload: Dict[str, Any]) -> Dict[str, Any]:
     url = f"{host.rstrip('/')}/api/chat"
     resp = requests.post(url, json=payload, timeout=300)
