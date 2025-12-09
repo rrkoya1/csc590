@@ -1,4 +1,4 @@
-# src/eval_combined_llm.py
+
 import argparse
 import json
 import os
@@ -7,10 +7,8 @@ import pandas as pd
 from tqdm import tqdm
 from sklearn.metrics import classification_report, accuracy_score
 from llm_utils_local import load_prompt_json, build_prompt, _post_ollama_chat
-
-# -----------------------------
 # Mapping & Parsing
-# -----------------------------
+
 INT_TO_T = {"1": "T1", "2": "T2", "3": "T3", "4": "T4"}
 INT_TO_N = {"0": "N0", "1": "N1", "2": "N2", "3": "N3"}
 INT_TO_M = {"0": "M0", "1": "M1"}
@@ -45,9 +43,7 @@ def parse_combined_json(llm_output):
         pass # Return Errors
     return preds
 
-# -----------------------------
 # Few-Shot Construction
-# -----------------------------
 def get_fewshot_examples(train_csv, k=3, seed=42):
     """Selects k random examples from the training set."""
     if not train_csv or not os.path.exists(train_csv):
@@ -102,9 +98,8 @@ def build_fewshot_prompt(prompt_obj, target_text, examples):
     final_messages = messages[:-1] + history + [{"role": "user", "content": f"REPORT:\n{target_text}"}]
     return {"messages": final_messages}
 
-# -----------------------------
 # Main
-# -----------------------------
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--test_csv", required=True)
