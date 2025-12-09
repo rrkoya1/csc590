@@ -1,7 +1,3 @@
-# train_transformer.py
-# Generic transformer trainer for text classification (Top-8/12 cancer-type, TNM T-stage)
-# Compat-safe TrainingArguments: only enable best-checkpoint logic if supported by local transformers
-
 import argparse
 import json
 import os
@@ -21,10 +17,6 @@ from transformers import (
     Trainer,
     TrainingArguments,
 )
-
-# -------------------------
-# Utilities
-# -------------------------
 
 def set_seed(seed: int = 42):
     random.seed(seed)
@@ -94,10 +86,6 @@ def filter_kwargs_for_signature(kwargs: Dict, cls) -> Dict:
     """Keep only kwargs supported by cls.__init__ (compat helper)."""
     sig = inspect.signature(cls.__init__)
     return {k: v for k, v in kwargs.items() if k in sig.parameters}
-
-# -------------------------
-# Main
-# -------------------------
 
 def main():
     parser = argparse.ArgumentParser()
