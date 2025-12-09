@@ -1,4 +1,3 @@
-# src/run_sweep.py
 import argparse, itertools, os, subprocess, sys
 
 def run_one(model, filtered, split, out_root, max_len, lr, epochs, batch, text_col, label_col):
