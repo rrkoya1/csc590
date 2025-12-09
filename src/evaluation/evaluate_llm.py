@@ -1,4 +1,4 @@
-# src/eval_zero_shot_llm.py
+
 from __future__ import annotations
 import argparse
 import json
@@ -21,9 +21,6 @@ from llm_utils_local import (
     M_ONLY_LABELS,
 )
 
-# -------------------------------
-# Robust split loader
-# -------------------------------
 def _pick_key(d: Dict[str, Any], candidates: List[str]) -> List[int]:
     for k in candidates:
         if k in d:
@@ -49,9 +46,6 @@ def load_split(filtered_csv: str, split_json: str, text_col: str, label_col: str
         df.iloc[test_idx][[text_col, label_col]].reset_index(drop=True),
     )
 
-# -------------------------------
-# Metrics
-# -------------------------------
 def macro_f1(y_true: List[str], y_pred: List[str]) -> float:
     uniq = sorted(list(set(y_true + y_pred)))
     f1s = []
@@ -64,9 +58,6 @@ def macro_f1(y_true: List[str], y_pred: List[str]) -> float:
         f1s.append(2 * prec * rec / (prec + rec) if (prec + rec) > 0 else 0.0)
     return float(np.mean(f1s)) if f1s else 0.0
 
-# -------------------------------
-# Few-shot helpers
-# -------------------------------
 def stratified_fewshot(
     train_df: pd.DataFrame,
     label_col: str,
@@ -188,9 +179,8 @@ def make_fewshot_messages_from_generic_template(
     messages.append({"role": "user", "content": f"REPORT:\n{test_report}\n\nClassify the T-stage. {format_labels_instruction(allowed_labels)}"})
     return messages
 
-# -------------------------------
 # Main
-# -------------------------------
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--filtered_csv", required=True)
